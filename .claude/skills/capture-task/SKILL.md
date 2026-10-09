@@ -5,7 +5,7 @@ description: Add new work to this repo's docs/TRACKER.md the disciplined way. Us
 
 # Capture New Task
 
-OWNER: **{{OWNER}}**. New work goes through the tracker — never straight into code.
+OWNER: **Nick**. New work goes through the tracker — never straight into code.
 
 ## Procedure
 
