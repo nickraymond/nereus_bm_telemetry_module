@@ -6,7 +6,7 @@ description: Session-start ritual for this repo's agent discipline. Use at the S
 # Agent Entry
 
 You are working under this repo's agent discipline. OWNER (the human gate) is:
-**{{OWNER}}**.
+**Nick**.
 
 ## On session start — in this order, before any code
 
