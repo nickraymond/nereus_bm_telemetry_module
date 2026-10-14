@@ -1,7 +1,7 @@
 # TRACKER.md — Sprint Ladder & Rules
 
 *The agent entry point. Newest state lives here.*
-*Last updated: 2026-10-08 · Owner/gate: **Nick Buemond***
+*Last updated: 2026-10-14 · Owner/gate: **Nick Buemond***
 
 ---
 
@@ -43,7 +43,7 @@ docs/PROVISION_PI.md   the tested fresh-Pi workflow
 | Sprint | Outcome | Demo (Nick runs it) | Status |
 |---|---|---|---|
 | S0 | LTE bring-up captured as a script; HAT verified | `sudo ./provision_lte.sh` on nereus001 ends PASS | DONE 2026-10-08 on nereus001 |
-| S0b | Same on the Pi Zero 2W + hub (field target) | fresh flash → quick start in README → PASS + JSON summary | NEXT (2026-10-09) |
+| S0b | Same on the Pi Zero 2W + hub (field target) | fresh flash → quick start in README → PASS + JSON summary | IN PROGRESS: PASS on Zero 2W + hub nereus000 (console host, not a fresh flash) 2026-10-14; fresh-flash field module still to do |
 | S1 | Uplink: send one file (image, then 30 s clip) from the Pi to staging over wwan0; log bytes, seconds, kbps, and modem signal per upload | upload a clip from the Pi; it shows on the dashboard; a CSV row per upload | queued |
 | S2 | Bus side: Pi ↔ mote UART, subscribe to a camera topic, reassemble a clip received over the bus (reuse bm_cam_legacy BM_Devel_Pi bm_serial / frame decoder) | bmcam003 publishes a clip; the module writes it to disk intact (hash match) | queued |
 | S3 | Downlink: poll the backend's command queue over LTE and forward a command onto the bus; ack back | dashboard command → camera node acts → ack on dashboard | queued |
@@ -55,12 +55,16 @@ Ladder S0b–S4 approved by Nick 2026-10-08.
 ## Current sprint: S0b — Pi Zero 2W provisioning
 
 **TODO (one at a time)**
-- [ ] Flash Pi Zero 2W (record OS/kernel in DESIGN §Bench), Wi-Fi + Tailscale
+- [~] Flash Pi Zero 2W (record OS/kernel in DESIGN §Bench), Wi-Fi + Tailscale
       (bm_cam_legacy skill `pi-tailscale-setup`), passwordless sudo.
-- [ ] Stack hub + HAT, SIM in, antenna on M. Plug HAT USB into the hub.
-- [ ] `scp tools/* pi@<host>:~/ && ssh pi@<host> 'sudo ./provision_lte.sh'`.
-- [ ] Record differences from nereus001 (USB hub enumeration, power draw
+- [x] Stack hub + HAT, SIM in, antenna on M. Plug HAT USB into the hub. (nereus000, 2026-10-14)
+- [x] `scp tools/* pi@<host>:~/ && ssh pi@<host> 'sudo ./provision_lte.sh'`. (PASS on nereus000 2026-10-14, docs/provisioning/nereus000_20261014.md)
+- [x] Record differences from nereus001 (USB hub enumeration, power draw
       symptoms, kernel/ModemManager versions) in DESIGN §Bench results.
-- [ ] Answer Q5 in SPEC. Q1: power the Zero from Nick's bench supply with a current readout and record idle / registered / transmit peaks during step 7.
+- [~] Answer Q5 in SPEC (proposed answer in DESIGN §Bench 2026-10-14, SPEC edit awaits Nick). Q1: power the Zero from Nick's bench supply with a current readout and record idle / registered / transmit peaks during step 7.
 
 **Demo:** the quick start in README on the Zero ends `PASS: LTE uplink working`.
+
+2026-10-14: nereus000 (bench console host: Zero 2W + hub + Spotter consoles) passed the quick start
+unchanged, plus Tailscale and an LTE-only reachability test (tools/link_down_test.sh). Still open for S0b:
+a fresh-flash field module, and a Q1 bench-supply current trace (lifepo4wered IOUT numbers are in DESIGN).
