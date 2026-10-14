@@ -25,6 +25,7 @@ what broke, what's next.*
 - Tailscale `nereus000` = 100.82.38.22. LTE-only test (eth0 + wlan0 down 120 s): reachable over the tailnet via the AT&T IP. New `tools/link_down_test.sh`.
 - udev rule so ModemManager ignores the Spotter consoles (0483:5740), verified with both consoles plugged in (D6).
 - Record with every change + restore command: `docs/provisioning/nereus000_20261014.md`.
+- GPS (antenna on G): 3D fix, 9 sats, HDOP 0.7 via the proven mmcli location commands; TTFF not measured; left disabled.
 **Broke/surprised us:**
 - The Wi-Fi firmware crashed (`brcmf_fw_crashed`) at the end of the ModemManager apt install, and the Pi was off the network for ~15 min until a power cycle. Cause unknown; power was normal.
 - `provision_lte.sh` step 4 (NetworkManager stopped) removes wlan0's IP for ~35 s. Run it detached; PROVISION_PI.md now says so.
